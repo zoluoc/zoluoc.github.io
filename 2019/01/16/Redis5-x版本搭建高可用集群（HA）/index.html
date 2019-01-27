@@ -98,22 +98,20 @@
 
 
 
-<meta name="description" content="单机环境搭建 单机环境仅供我们平时开发和测试时使用，一般我们可能会在 Linux 或者 Windows 上部署，Windows版本的部署非常简单，首先在 GitHub 上下载 zip 包解压到指定位置，后执行下面的命令就成功的部署好了。下载地址 Redis GitHub 下载地址">
 <meta name="keywords" content="redis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Redis5.x版本搭建高可用集群（HA）">
 <meta property="og:url" content="https://www.corkercode.com/2019/01/16/Redis5-x版本搭建高可用集群（HA）/index.html">
 <meta property="og:site_name" content="zoluo">
-<meta property="og:description" content="单机环境搭建 单机环境仅供我们平时开发和测试时使用，一般我们可能会在 Linux 或者 Windows 上部署，Windows版本的部署非常简单，首先在 GitHub 上下载 zip 包解压到指定位置，后执行下面的命令就成功的部署好了。下载地址 Redis GitHub 下载地址">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://plbhkv0pr.bkt.clouddn.com/redis%20ha.png">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7269465-e0b6c83daf237c6e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7269465-48e11219eb7bc74b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7269465-7e1e0fe8a15432b7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-01-27T12:00:35.872Z">
+<meta property="og:updated_time" content="2019-01-27T16:13:40.678Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis5.x版本搭建高可用集群（HA）">
-<meta name="twitter:description" content="单机环境搭建 单机环境仅供我们平时开发和测试时使用，一般我们可能会在 Linux 或者 Windows 上部署，Windows版本的部署非常简单，首先在 GitHub 上下载 zip 包解压到指定位置，后执行下面的命令就成功的部署好了。下载地址 Redis GitHub 下载地址">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/7269465-e0b6c83daf237c6e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:image" content="http://plbhkv0pr.bkt.clouddn.com/redis%20ha.png">
 
 
 
@@ -364,8 +362,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-01-27T20:00:35+08:00">
-                2019-01-27
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-28T00:13:40+08:00">
+                2019-01-28
               </time>
             
           </span>
@@ -409,6 +407,17 @@
           
 
           
+          
+             <span id="/2019/01/16/Redis5-x版本搭建高可用集群（HA）/" class="leancloud_visitors" data-flag-title="Redis5.x版本搭建高可用集群（HA）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
           
 
           
@@ -466,10 +475,13 @@
       
 
       
-        <h3 id="单机环境搭建"><a href="#单机环境搭建" class="headerlink" title="单机环境搭建"></a>单机环境搭建</h3><blockquote>
+        <div style="width: 500px; margin: auto"><img src="http://plbhkv0pr.bkt.clouddn.com/redis%20ha.png" alt=""></div>
+
+<a id="more"></a>
+<h3 id="单机环境搭建"><a href="#单机环境搭建" class="headerlink" title="单机环境搭建"></a>单机环境搭建</h3><blockquote>
 <p>单机环境仅供我们平时开发和测试时使用，一般我们可能会在 Linux 或者 Windows 上部署，Windows版本的部署非常简单，首先在 GitHub 上下载 zip 包解压到指定位置，后执行下面的命令就成功的部署好了。下载地址 <a href="https://github.com/MicrosoftArchive/redis/releases" target="_blank" rel="noopener">Redis GitHub 下载地址</a></p>
 </blockquote>
-<a id="more"></a>
+<!--more -->
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">redis-server.exe redis.windows.config</span><br><span class="line">`</span><br></pre></td></tr></table></figure>
 <p>运行成功如下图<br><img src="http://upload-images.jianshu.io/upload_images/7269465-e0b6c83daf237c6e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Windows Redis"></p>
 <blockquote>
@@ -598,8 +610,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/15/Hexo博客建站一〈基础搭建〉/" rel="next" title="Hexo博客建站一〈基础搭建〉">
-                <i class="fa fa-chevron-left"></i> Hexo博客建站一〈基础搭建〉
+              <a href="/2018/12/14/Docker-Harbor私有仓库搭建/" rel="next" title="Docker Harbor私有仓库搭建">
+                <i class="fa fa-chevron-left"></i> Docker Harbor私有仓库搭建
               </a>
             
           </div>
@@ -715,7 +727,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -726,7 +738,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -737,7 +749,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -841,7 +853,7 @@
 </div>
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">全站共3k字</span>
+  <span class="post-count">全站共24.6k字</span>
 </div>
 
         
@@ -1358,6 +1370,113 @@
 
 
   
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("F03bWiFpGBow26jvqWd38iBK-gzGzoHsz", "cCMjSXRIJies5tpN2tEIJWc9");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
 
   
 

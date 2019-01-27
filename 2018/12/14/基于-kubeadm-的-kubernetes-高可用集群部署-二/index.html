@@ -1,0 +1,1735 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+      app_id: "b2f59f80"
+    });
+  daovoice('update');
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="kubernetes,docker,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="zoluo" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="keywords" content="kubernetes,docker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于 kubeadm 的 kubernetes 高可用集群部署&lt;二&gt;">
+<meta property="og:url" content="https://www.corkercode.com/2018/12/14/基于-kubeadm-的-kubernetes-高可用集群部署-二/index.html">
+<meta property="og:site_name" content="zoluo">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://plbhkv0pr.bkt.clouddn.com/play%20with%20kubernetes.png">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7269465-de901cce4ae89230.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7269465-ce9762828815f5c3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7269465-785945c74b422195.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7269465-5a0854759306eb8c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7269465-c235daafcd55367d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7269465-3478426f78dc9998.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7269465-a4cad563360574fd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7269465-1fed0c3b0fef8ddb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7269465-137d10bf8407a071.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7269465-42ca76e12c3c2f47.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7269465-90b2762635e6ead0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7269465-4fa818a4180c6c50.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7269465-22a6da85f6f40076.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-01-27T16:15:41.905Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基于 kubeadm 的 kubernetes 高可用集群部署&lt;二&gt;">
+<meta name="twitter:image" content="http://plbhkv0pr.bkt.clouddn.com/play%20with%20kubernetes.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://www.corkercode.com/2018/12/14/基于-kubeadm-的-kubernetes-高可用集群部署-二/">
+
+
+
+
+
+  <title>基于 kubeadm 的 kubernetes 高可用集群部署<二> | zoluo</二></title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://https://github.com/zoluoc" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">zoluo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.corkercode.com/2018/12/14/基于-kubeadm-的-kubernetes-高可用集群部署-二/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zoluo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://plbhkv0pr.bkt.clouddn.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zoluo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">基于 kubeadm 的 kubernetes 高可用集群部署<二></二></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-14T17:32:37+08:00">
+                2018-12-14
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-28T00:15:41+08:00">
+                2019-01-28
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Kubernetes/" itemprop="url" rel="index">
+                    <span itemprop="name">Kubernetes</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/12/14/基于-kubeadm-的-kubernetes-高可用集群部署-二/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/12/14/基于-kubeadm-的-kubernetes-高可用集群部署-二/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/12/14/基于-kubeadm-的-kubernetes-高可用集群部署-二/" class="leancloud_visitors" data-flag-title="基于 kubeadm 的 kubernetes 高可用集群部署<二>">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">阅读量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3.5k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  18
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <div style="width: 500px; margin: auto"><img src="http://plbhkv0pr.bkt.clouddn.com/play%20with%20kubernetes.png" alt=""></div>
+
+<a id="more"></a>
+<blockquote>
+<p>上一篇我们的基本工作已经准备完成，这篇我们说重要的安装过程。</p>
+</blockquote>
+<h3 id="kubernetes-相关服务安装"><a href="#kubernetes-相关服务安装" class="headerlink" title="kubernetes 相关服务安装"></a>kubernetes 相关服务安装</h3><ol>
+<li>在 kubernetes 所有节点上验证 SELINUX 模式，必须保证 SELINUX 为 permissive 模式，否则 kubernetes 启动会出现各种异常。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@k8s-master1 yaml]# getenforcePermissive</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>在 kubernetes 所有节点上安装并启动 kubernetes 和 docker</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y kubernetes-cni-0.6.0-0.x86_64 kubelet-1.10.3-0.x86_64 kubectl-1.10.3-0.x86_64 kubeadm-1.10.3-0.x86_64systemctl enable docker &amp;&amp; systemctl start dockersystemctl enable kubelet &amp;&amp; systemctl start kubelet</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>独立 etcd 集群部署</li>
+</ol>
+<ul>
+<li>在 k8s-master1 节点上以 docker 方式启动 etcd 集群</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker stop etcd &amp;&amp; docker rm etcd$ rm -rf /var/lib/etcd-cluster$ mkdir -p /var/lib/etcd-cluster$ docker run -d \--restart always \-v /etc/ssl/certs:/etc/ssl/certs \-v /var/lib/etcd-cluster:/var/lib/etcd \-p 4001:4001 \-p 2380:2380 \-p 2379:2379 \--name etcd \k8s.gcr.io/etcd-amd64:3.2.17 \etcd --name=etcd0 \--advertise-client-urls=http://172.24.12.32:2379,http://172.24.12.32:4001 \--listen-client-urls=http://0.0.0.0:2379,http://0.0.0.0:4001 \--initial-advertise-peer-urls=http://172.24.12.32:2380 \--listen-peer-urls=http://0.0.0.0:2380 \--initial-cluster-token=9477af68bbee1b9ae037d6fd9e7efefd \--initial-cluster=etcd0=http://172.24.12.32:2380,etcd1=http://172.24.12.33:2380,etcd2=http://172.24.12.34:2380 \--initial-cluster-state=new \--auto-tls \--peer-auto-tls \--data-dir=/var/lib/etcd</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在 k8s-master2 节点上以 docker 方式启动 etcd 集群</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker stop etcd &amp;&amp; docker rm etcd$ rm -rf /var/lib/etcd-cluster$ mkdir -p /var/lib/etcd-cluster$ docker run -d \--restart always \-v /etc/ssl/certs:/etc/ssl/certs \-v /var/lib/etcd-cluster:/var/lib/etcd \-p 4001:4001 \-p 2380:2380 \-p 2379:2379 \--name etcd \k8s.gcr.io/etcd-amd64:3.2.17 \etcd --name=etcd1 \--advertise-client-urls=http://172.24.12.33:2379,http://172.24.12.33:4001 \--listen-client-urls=http://0.0.0.0:2379,http://0.0.0.0:4001 \--initial-advertise-peer-urls=http://172.24.12.33:2380 \--listen-peer-urls=http://0.0.0.0:2380 \--initial-cluster-token=9477af68bbee1b9ae037d6fd9e7efefd \--initial-cluster=etcd0=http://172.24.12.32:2380,etcd1=http://172.24.12.33:2380,etcd2=http://172.24.12.34:2380 \--initial-cluster-state=new \--auto-tls \--peer-auto-tls \--data-dir=/var/lib/etcd</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在 k8s-master3 节点上以 docker 方式启动 etcd 集群</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker stop etcd &amp;&amp; docker rm etcd$ rm -rf /var/lib/etcd-cluster$ mkdir -p /var/lib/etcd-cluster$ docker run -d \--restart always \-v /etc/ssl/certs:/etc/ssl/certs \-v /var/lib/etcd-cluster:/var/lib/etcd \-p 4001:4001 \-p 2380:2380 \-p 2379:2379 \--name etcd \k8s.gcr.io/etcd-amd64:3.2.17 \etcd --name=etcd2 \--advertise-client-urls=http://172.24.12.34:2379,http://172.24.12.34:4001 \--listen-client-urls=http://0.0.0.0:2379,http://0.0.0.0:4001 \--initial-advertise-peer-urls=http://172.24.12.34:2380 \--listen-peer-urls=http://0.0.0.0:2380 \--initial-cluster-token=9477af68bbee1b9ae037d6fd9e7efefd \--initial-cluster=etcd0=http://172.24.12.32:2380,etcd1=http://172.24.12.33:2380,etcd2=http://172.24.12.34:2380 \--initial-cluster-state=new \--auto-tls \--peer-auto-tls \--data-dir=/var/lib/etcd</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在 k8s-master1、k8s-master2、k8s-master3 上检查 etcd 启动状态</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@k8s-master1 yaml]# docker exec -ti etcd ash/ # etcdctl member list7952c466eeed1e71: name=etcd0 peerURLs=http://172.24.12.32:2380 clientURLs=http://172.24.12.32:2379,http://172.24.12.32:4001 isLeader=falseea0f9c89ab07d1c2: name=etcd2 peerURLs=http://172.24.12.34:2380 clientURLs=http://172.24.12.34:2379,http://172.24.12.34:4001 isLeader=truefd15cb75a309af35: name=etcd1 peerURLs=http://172.24.12.33:2380 clientURLs=http://172.24.12.33:2379,http://172.24.12.33:4001 isLeader=false/ # etcdctl cluster-healthmember 7952c466eeed1e71 is healthy: got healthy result from http://172.24.12.32:2379member ea0f9c89ab07d1c2 is healthy: got healthy result from http://172.24.12.34:2379member fd15cb75a309af35 is healthy: got healthy result from http://172.24.12.33:2379cluster is healthy/ # exit</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>kubeadm 初始化</li>
+</ol>
+<ul>
+<li>在 k8s-master1 上修改 kubeadm-init.yaml 文件，设置 etcd.endpoints 的<code>${HOST_IP}</code>为 k8s-master1、k8s-master2、k8s-master3 的 IP 地址</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@k8s-master1 yaml]# cat kubeadm-init.yamlapiVersion: kubeadm.k8s.io/v1alpha1kind: MasterConfigurationkubernetesVersion: v1.10.3networking:  podSubnet: 10.244.0.0/16apiServerCertSANs:- k8s-master1- k8s-master2- k8s-master3- 172.24.12.32- 172.24.12.33- 172.24.12.34- 172.24.12.80etcd:  endpoints:  - http://172.24.12.32:2379  - http://172.24.12.33:2379  - http://172.24.12.34:2379</span><br></pre></td></tr></table></figure>
+<p><strong>注：如果使用kubeadm初始化集群，启动过程可能会卡在以下位置，那么可能是因为 cgroup-driver 参数与 docker 的不一致引起，如下：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[apiclient] Created API client, waiting for the control plane to become ready$ journalctl -t kubelet -S &apos;2017-06-08&apos; #查看日志，发现如下错误error: failed to run Kubelet: failed to create kubelet: misconfiguration: kubelet cgroup driver: &quot;systemd&quot;</span><br></pre></td></tr></table></figure>
+<p>需要修改 KUBELET_CGROUP_ARGS=–cgroup-driver=systemd 为 KUBELET_CGROUP_ARGS=–cgroup-driver=cgroupfs</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vi /etc/systemd/system/kubelet.service.d/10-kubeadm.conf#Environment=&quot;KUBELET_CGROUP_ARGS=--cgroup-driver=systemd&quot; Environment=&quot;KUBELET_CGROUP_ARGS=--cgroup-driver=cgroupfs&quot;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在 k8s-master1 上使用 kubeadm 初始化 kubernetes 集群，连接外部 etcd 集群</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ kubeadm init --config=/home/yaml/kubeadm-init.yaml</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在 k8s-master1 上设置 kubectl 的环境变量 KUBECONFIG，连接 kubelet</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vi ~/.bashrc export KUBECONFIG=/etc/kubernetes/admin.conf$ source ~/.bashrc</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>flannel 网络组件安装</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl create -f /home/yaml/kube-flannel.yml</span><br></pre></td></tr></table></figure>
+<p>在 k8s-master1 上验证 kube-dns 成功启动，大概等待3分钟，验证所有 pods 的状态为 Running，验证方式见 <a href="https://www.jianshu.com/p/08b6454ebfc1" target="_blank" rel="noopener">k8s-测试dns</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl get pods --all-namespaces -o wide</span><br></pre></td></tr></table></figure>
+<ol start="6">
+<li>dashboard 和 heapster 组件安装</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl create -f /home/yaml/kubernetes-dashboard-admin.rbac.yamlkubectl create -f /home/yaml/kubernetes-dashboard.yaml</span><br></pre></td></tr></table></figure>
+<p><strong>注：在 k8s-master1 上允许在 master 上部署 pod，否则 heapster 会无法部署，执行以下命令：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl taint nodes --all node-role.kubernetes.io/master-node &quot;k8s-master1&quot; taintedkubectl create -f /home/yaml/heapster-rbac.yamlkubectl create -f /home/yaml/heapster.yaml</span><br></pre></td></tr></table></figure>
+<p>在本机上访问 dashboard 地址 <a href="http://172.24.12.32:30090，验证" target="_blank" rel="noopener">http://172.24.12.32:30090，验证</a> heapster 成功启动，查看 Pods 的 CPU 以及 Memory 信息是否正常呈现，如下：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/7269465-de901cce4ae89230.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="dashboard" title="dashboard"></p>
+<figcaption style="line-height: inherit; margin: 0px; padding: 0px; margin-top: 10px; text-align: center; color: rgb(153, 153, 153); font-size: 0.7em;">dashboard</figcaption>
+
+<p>至此，第一台 master 成功安装，并已经完成 flannel、dashboard、heapster 的部署。</p>
+<h3 id="master-集群高可用设置"><a href="#master-集群高可用设置" class="headerlink" title="master 集群高可用设置"></a>master 集群高可用设置</h3><ol>
+<li>在 k8s-master1 上把 /etc/kubernetes/ 复制到 k8s-master2、k8s-master3</li>
+<li>在 k8s-master2、k8s-master3 上重启 kubelet 服务，并检查 kubelet 服务状态为 active (running)</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl daemon-reload &amp;&amp; systemctl restart kubelet</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>在 k8s-master2、k8s-master3 上设置 kubectl 的环境变量 KUBECONFIG，连接 kubelet</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vi ~/.bashrcexport KUBECONFIG=/etc/kubernetes/admin.conf$ source ~/.bashrc</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>在 k8s-master2、k8s-master3 检测节点状态，发现节点已经加进来</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@k8s-master1 yaml]# kubectl get nodes -o wide</span><br></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/7269465-ce9762828815f5c3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="nodes" title="nodes"></p>
+<figcaption style="line-height: inherit; margin: 0px; padding: 0px; margin-top: 10px; text-align: center; color: rgb(153, 153, 153); font-size: 0.7em;">nodes</figcaption>
+
+<ol start="5">
+<li>在 k8s-master2、k8s-master3 上修改 kube-apiserver.yaml 的配置，<code>${HOST_IP}</code>改为本机 IP</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vi /etc/kubernetes/manifests/kube-apiserver.yaml- --advertise-address=$&#123;HOST_IP&#125;</span><br></pre></td></tr></table></figure>
+<ol start="6">
+<li>在 k8s-master2 和 k8s-master3 上的修改 kubelet.conf 设置，<code>${HOST_IP}</code>改为本机 IP</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vi /etc/kubernetes/kubelet.confserver: https://$&#123;HOST_IP&#125;:6443</span><br></pre></td></tr></table></figure>
+<ol start="7">
+<li>在 k8s-master2 和 k8s-master3 上的重启服务</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ systemctl daemon-reload &amp;&amp; systemctl restart docker kubelet</span><br></pre></td></tr></table></figure>
+<ol start="8">
+<li>创建证书<br>(1)在 k8s-master2 和 k8s-master3 上修改 kubelet.conf 后，由于 kubelet.conf 配置的 crt 和 key 与本机 IP 地址不一致的情况，kubelet 服务会异常退出，crt 和 key 必须重新制作。查看 apiserver.crt 的签名信息，发现 IP Address 以及 DNS 绑定了 k8s-master1，必须进行相应修改。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ openssl x509 -noout -text -in /etc/kubernetes/pki/apiserver.crt</span><br></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/7269465-785945c74b422195.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="k8s-apiserver.crt" title="k8s-apiserver.crt"></p>
+<figcaption style="line-height: inherit; margin: 0px; padding: 0px; margin-top: 10px; text-align: center; color: rgb(153, 153, 153); font-size: 0.7em;">k8s-apiserver.crt</figcaption>
+
+<p>(2)在 k8s-master1、k8s-master2、k8s-master3 上使用 ca.key 和 ca.crt 制作 apiserver.crt 和<br>apiserver.key</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir -p /etc/kubernetes/pki-local$ cd /etc/kubernetes/pki-local</span><br></pre></td></tr></table></figure>
+<p>(3)在 k8s-master1、k8s-master2、k8s-master3 上生成 2048 位的密钥对</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ openssl genrsa -out apiserver.key 2048</span><br></pre></td></tr></table></figure>
+<p>(4)在 k8s-master1、k8s-master2、k8s-master3 上生成证书签署请求文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ openssl req -new -key apiserver.key -subj &quot;/CN=kube-apiserver,&quot; -out apiserver.csr</span><br></pre></td></tr></table></figure>
+<p>(5)在 k8s-master1、k8s-master2、k8s-master3 上编辑 apiserver.ext 文件，<code>${HOST_NAME}</code>修改为本机主机名，<code>${HOST_IP}</code>修改为本机 IP 地址，<code>${VIRTUAL_IP}</code>修改为 keepalived 的虚拟 IP（172.24.12.80）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vi apiserver.extsubjectAltName = DNS:$&#123;HOST_NAME&#125;,DNS:kubernetes,DNS:kubernetes.default,DNS:kubernetes.default.svc, DNS:kubernetes.default.svc.cluster.local, IP:10.96.0.1, IP:$&#123;HOST_IP&#125;, IP:$&#123;VIRTUAL_IP&#125;</span><br></pre></td></tr></table></figure>
+<p>(6)在 k8s-master1、k8s-master2、k8s-master3 上使用 ca.key 和 ca.crt 签署上述请求</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ openssl x509 -req -in apiserver.csr -CA /etc/kubernetes/pki/ca.crt -CAkey /etc/kubernetes/pki/ca.key -CAcreateserial -out apiserver.crt -days 365 -extfile /etc/kubernetes/pki-local/apiserver.ext</span><br></pre></td></tr></table></figure>
+<p>(7)在 k8s-master1、k8s-master2、k8s-master3 上查看新生成的证书：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ openssl x509 -noout -text -in apiserver.crt</span><br></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/7269465-5a0854759306eb8c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="k8s-apiserver.crt2" title="k8s-apiserver.crt2"></p>
+<figcaption style="line-height: inherit; margin: 0px; padding: 0px; margin-top: 10px; text-align: center; color: rgb(153, 153, 153); font-size: 0.7em;">k8s-apiserver.crt2</figcaption>
+
+<p>(8)在 k8s-master1、k8s-master2、k8s-master3 上把 apiserver.crt 和 apiserver.key 文件复制到 /etc/kubernetes/pki 目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp apiserver.crt apiserver.key /etc/kubernetes/pki/</span><br></pre></td></tr></table></figure>
+<ol start="9">
+<li>在 k8s-master2 和 k8s-master3 上修改 admin.conf，<code>${HOST_IP}</code>修改为本机 IP 地址</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vi /etc/kubernetes/admin.confserver: https://$&#123;HOST_IP&#125;:6443</span><br></pre></td></tr></table></figure>
+<ol start="10">
+<li>在 k8s-master2 和 k8s-master3 上修改 controller-manager.conf，<code>${HOST_IP}</code>修改为本机 IP 地址</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vi /etc/kubernetes/controller-manager.confserver: https://$&#123;HOST_IP&#125;:6443</span><br></pre></td></tr></table></figure>
+<ol start="11">
+<li>在 k8s-master2 和 k8s-master3 上修改 scheduler.conf，<code>${HOST_IP}</code>修改为本机 IP 地址</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vi /etc/kubernetes/scheduler.confserver: https://$&#123;HOST_IP&#125;:6443</span><br></pre></td></tr></table></figure>
+<ol start="12">
+<li>在 k8s-master1、k8s-master2、k8s-master3 上重启所有服务</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ systemctl daemon-reload &amp;&amp; systemctl restart docker kubelet</span><br></pre></td></tr></table></figure>
+<h3 id="验证高可用安装"><a href="#验证高可用安装" class="headerlink" title="验证高可用安装"></a>验证高可用安装</h3><ol>
+<li>在 k8s-master1、k8s-master2、k8s-master3 任意节点上检测服务启动情况，发现 apiserver、controller-manager、kube-scheduler、proxy、flannel 已经在 k8s-master1、k8s-master2、k8s-master3 成功启动</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl get pod --all-namespaces -o wide | grep k8s-master1$ kubectl get pod --all-namespaces -o wide | grep k8s-master2$ kubectl get pod --all-namespaces -o wide | grep k8s-master3</span><br></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/7269465-c235daafcd55367d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="服务启动情况" title="服务启动情况"></p>
+<figcaption style="line-height: inherit; margin: 0px; padding: 0px; margin-top: 10px; text-align: center; color: rgb(153, 153, 153); font-size: 0.7em;">服务启动情况</figcaption>
+
+<ol start="2">
+<li>在 k8s-master1、k8s-master2、k8s-master3 任意节点上通过 kubectl logs 检查各个 controller-manager 和 scheduler 的 leader election 结果，可以发现只有一个节点有效表示选举正常</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl logs -n kube-system kube-controller-manager-k8s-master1$ kubectl logs -n kube-system kube-controller-manager-k8s-master2$ kubectl logs -n kube-system kube-controller-manager-k8s-master3$ kubectl logs -n kube-system kube-scheduler-k8s-master1$ kubectl logs -n kube-system kube-scheduler-k8s-master2$ kubectl logs -n kube-system kube-scheduler-k8s-master3</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>在 k8s-master1、k8s-master2、k8s-master3 任意节点上查看 deployment 的情况</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl get deploy --all-namespaces</span><br></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/7269465-3478426f78dc9998.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="deployment的情况" title="deployment的情况"></p>
+<figcaption style="line-height: inherit; margin: 0px; padding: 0px; margin-top: 10px; text-align: center; color: rgb(153, 153, 153); font-size: 0.7em;">deployment的情况</figcaption>
+
+<ol start="4">
+<li>在 k8s-master1、k8s-master2、k8s-master3 任意节点上把 kubernetes-dashboard、kube-dns、 scale up 扩成 replicas=3，保证各个 master 节点上都有运行</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl scale --replicas=3 -n kube-system deployment/kube-dns$ kubectl get pods --all-namespaces -o wide| grep kube-dns$ kubectl scale --replicas=3 -n kube-system deployment/kubernetes-dashboard$ kubectl get pods --all-namespaces -o wide| grep kubernetes-dashboard$ kubectl scale --replicas=3 -n kube-system deployment/heapster$ kubectl get pods --all-namespaces -o wide| grep heapster</span><br></pre></td></tr></table></figure>
+<h3 id="keepalived-安装配置"><a href="#keepalived-安装配置" class="headerlink" title="keepalived 安装配置"></a>keepalived 安装配置</h3><ol>
+<li>在 k8s-master、k8s-master2、k8s-master3 上安装 keepalived</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yum install -y keepalived$ systemctl enable keepalived &amp;&amp; systemctl restart keepalived</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>在 k8s-master1、k8s-master2、k8s-master3 上备份 keepalived 配置文件</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ mv /etc/keepalived/keepalived.conf /etc/keepalived/keepalived.conf.bak</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>在 k8s-master1、k8s-master2、k8s-master3 上设置 apiserver 监控脚本，当 apiserver 检测失败的时候关闭 keepalived 服务，转移虚拟 IP 地址</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vi /etc/keepalived/check_apiserver.sh#!/bin/bash err=0 for k in $( seq 1 10 ) do check_code=$(ps -ef|grep kube-apiserver | wc -l) if [ &quot;$check_code&quot; = &quot;1&quot; ]; then err=$(expr $err + 1) sleep 5 continue else err=0 break fi done if [ &quot;$err&quot; != &quot;0&quot; ]; then echo &quot;systemctl stop keepalived&quot; /usr/bin/systemctl stop keepalived exit 1 else exit 0 fi$ chmod a+x /etc/keepalived/check_apiserver.sh</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>在 k8s-master1、k8s-master2、k8s-master3 上查看接口名字</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ip a | grep 172.24.12</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>在 k8s-master1、k8s-master2、k8s-master3 上设置 keepalived，参数说明如下：<br>state <code>${STATE}</code>：为 MASTER 或者 BACKUP，只能有一个 MASTER<br>interface <code>${INTERFACE_NAME</code>}：为本机的需要绑定的接口名字（通过上边的 ip a 命令查看）<br>mcast_src_ip <code>${HOST_IP}</code>：为本机的IP地址<br>priority <code>${PRIORITY}</code>：为优先级，例如 102、101、100，优先级越高越容易选择为 MASTER，优先级不能一样， master设置应高于 backup<br><code>${VIRTUAL_IP}</code>：为虚拟的 IP 地址，这里设置为 172.24.12.80</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vi /etc/keepalived/keepalived.conf</span><br></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/7269465-a4cad563360574fd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="keepalived参数设置" title="keepalived参数设置"></p>
+<figcaption style="line-height: inherit; margin: 0px; padding: 0px; margin-top: 10px; text-align: center; color: rgb(153, 153, 153); font-size: 0.7em;">keepalived参数设置</figcaption>
+
+<ol start="6">
+<li>在 k8s-master1、k8s-master2、k8s-master3 上重启 keepalived 服务，检测虚拟 IP 地址是否生效</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ systemctl restart keepalived$ ping 172.24.12.80</span><br></pre></td></tr></table></figure>
+<h4 id="nginx负载均衡配置"><a href="#nginx负载均衡配置" class="headerlink" title="nginx负载均衡配置"></a>nginx负载均衡配置</h4><ol>
+<li>在 k8s-master1、k8s-master2、k8s-master3 上修改 nginx-default.conf设置，<code>${HOST_IP}</code>对应 k8s-master1、k8s-master2、k8s-master3 的地址。通过 nginx 把访问 apiserver 的 6443 端口负载均衡到 8433 端口上</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vi /home/yaml/nginx-default.confstream &#123;   upstream apiserver &#123;     server $&#123;HOST_IP&#125;:6443 weight=5 max_fails=3 fail_timeout=30s;     server $&#123;HOST_IP&#125;:6443 weight=5 max_fails=3 fail_timeout=30s;     server $&#123;HOST_IP&#125;:6443 weight=5 max_fails=3 fail_timeout=30s;  &#125;  server &#123;     listen 8443;     proxy_connect_timeout 1s;     proxy_timeout 3s; proxy_pass apiserver;  &#125; &#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>在 k8s-master1、k8s-master2、k8s-master3 上启动 nginx 容器</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -d -p 8443:8443 \ --name nginx-lb \ --restart always \ -v /home/yaml/nginx-default.conf:/etc/nginx/nginx.conf \ nginx</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>在 k8s-master1、k8s-master2、k8s-master3 上检测 keepalived 服务的虚拟 IP 地址指向</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ curl -L 192.168.60.80:8443 | wc -l% Total % Received % Xferd Average Speed Time Time Time Current Dload Upload Total Spent Left Speed 100 14 0 14 0 0 18324 0 --:--:-- --:--:-- --:--:-- 14000 1</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>业务恢复后务必重启 keepalived，否则 keepalived 会处于关闭状态</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ systemctl restart keepalived</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>在 k8s-master1、k8s-master2、k8s-master3 上查看 keeplived 日志，有以下输出表示当前虚拟 IP 地址绑定的主机</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ systemctl status keepalived -lVRRP_Instance(VI_1) Sending gratuitous ARPs on ens160 for 172.24.12.80</span><br></pre></td></tr></table></figure>
+<h4 id="kube-proxy配置"><a href="#kube-proxy配置" class="headerlink" title="kube-proxy配置"></a>kube-proxy配置</h4><ol>
+<li>在 k8s-master1 上设置 kube-proxy 使用 keepalived 的虚拟IP地址，避免 k8s-master1 异常的时候所有节点的 kube-proxy 连接不上</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl get -n kube-system configmap  NAME DATA AGE extension-apiserver-authentication 6 4h kube-flannel-cfg 2 4h kube-proxy 1 4h</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>在 k8s-master1 上修改 configmap/kube-proxy 的 server 指向 keepalived 的虚拟IP地址</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl edit -n kube-system configmap/kube-proxy  server: https://172.24.12.80:8443</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>在 k8s-master1 上查看 configmap/kube-proxy 设置情况</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl get -n kube-system configmap/kube-proxy -o yaml</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>在 k8s-master1 上删除所有 kube-proxy 的 pod，让 proxy 重建</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pods --all-namespaces -o wide | grep proxy</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>在 k8s-master1、k8s-master2、k8s-master3 上重启 docker kubelet keepalived 服务</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart docker kubelet keepalived</span><br></pre></td></tr></table></figure>
+<h3 id="验证-master-集群高可用"><a href="#验证-master-集群高可用" class="headerlink" title="验证 master 集群高可用"></a>验证 master 集群高可用</h3><p>在 k8s-master1 上检查各个节点 pod 的启动状态，每个上都成功启动 heapster、kube-apiserver、kube-controller-manager、kube-dns、kube-flannel、kube-proxy、kube-scheduler、kubernetes-dashboard、monitoring-grafana、monitoring-influxdb。并且所有 pod 都处于 Running 状态表示正常</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl get pods --all-namespaces -o wide | grep k8s-master1$ kubectl get pods --all-namespaces -o wide | grep k8s-master2$ kubectl get pods --all-namespaces -o wide | grep k8s-master3</span><br></pre></td></tr></table></figure>
+<h3 id="node-节点加入高可用集群设置"><a href="#node-节点加入高可用集群设置" class="headerlink" title="node 节点加入高可用集群设置"></a>node 节点加入高可用集群设置</h3><ol>
+<li>在 k8s-master1 上查看集群的 token</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ kubeadm token list</span><br></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/7269465-1fed0c3b0fef8ddb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="kubeadm token" title="kubeadm token"></p>
+<figcaption style="line-height: inherit; margin: 0px; padding: 0px; margin-top: 10px; text-align: center; color: rgb(153, 153, 153); font-size: 0.7em;">kubeadm token</figcaption>
+
+<ol start="2">
+<li>在 k8s-node1~k8s-node8 上，<code>${TOKEN}</code>为 k8s-master1 上显示的 token，<code>${VIRTUAL_IP}</code>为 keepalived 的虚拟 IP 地址 172.24.12.80</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ kubeadm join --token $&#123;TOKEN&#125; $&#123;VIRTUAL_IP&#125;:8443</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>查看 kubelet status,确保 activing</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@k8s-node1 ~]# systemctl start  kubelet[root@k8s-node1 ~]# journalctl -xeu kubelet</span><br></pre></td></tr></table></figure>
+<p><strong>注：如果有不必要的报错，使用下面 join 方法：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@k8s-node1 ~]# kubeadm join --token efeayj.qa8q6c0ojo72crsn 172.24.12.80:8443 --ignore-preflight-errors &apos;all&apos; --discovery-token-unsafe-skip-ca-verification</span><br></pre></td></tr></table></figure>
+<h4 id="部署应用验证集群"><a href="#部署应用验证集群" class="headerlink" title="部署应用验证集群"></a>部署应用验证集群</h4><ol>
+<li>在 k8s-node1 ~ k8s-node8 上查看 kubelet 状态，kubelet 状态为 active (running) 表示 kubelet 服务正常启动</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status keepalived</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>在 k8s-master1 上检查各个节点状态，发现所有 k8s-nodes 节点成功加入</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@k8s-master1 yaml]# kubectl get nodes -o wide</span><br></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/7269465-137d10bf8407a071.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="kubectl get nodes" title="kubectl get nodes"></p>
+<figcaption style="line-height: inherit; margin: 0px; padding: 0px; margin-top: 10px; text-align: center; color: rgb(153, 153, 153); font-size: 0.7em;">kubectl get nodes</figcaption>
+
+<ol start="3">
+<li>在 k8s-master1 上测试部署 nginx 服务，nginx 服务成功部署到 k8s-node1 上</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@k8s-master1 yaml]# kubectl run nginx --image=nginx --port=80[root@k8s-master1 yaml]# kubectl get pod -o wide -l=run=nginx</span><br></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/7269465-42ca76e12c3c2f47.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="run nginx" title="run nginx"></p>
+<figcaption style="line-height: inherit; margin: 0px; padding: 0px; margin-top: 10px; text-align: center; color: rgb(153, 153, 153); font-size: 0.7em;">run nginx</figcaption>
+
+<ol start="4">
+<li>在 k8s-master1 让 nginx 服务外部可见</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@k8s-master1 yaml]# kubectl expose deployment nginx --port=80 --target-port=80 --type=NodePort[root@k8s-master1 yaml]# kubectl get svc -l=run=nginx</span><br></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/7269465-90b2762635e6ead0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="nginx服务外部可见" title="nginx服务外部可见"></p>
+<figcaption style="line-height: inherit; margin: 0px; padding: 0px; margin-top: 10px; text-align: center; color: rgb(153, 153, 153); font-size: 0.7em;">nginx服务外部可见</figcaption>
+
+<ol start="5">
+<li>访问测试</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@k8s-master1 yaml]# curl 172.24.12.35:31012</span><br></pre></td></tr></table></figure>
+<p>或者使用浏览器访问，如下：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/7269465-4fa818a4180c6c50.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="curl nginx" title="curl nginx"></p>
+<figcaption style="line-height: inherit; margin: 0px; padding: 0px; margin-top: 10px; text-align: center; color: rgb(153, 153, 153); font-size: 0.7em;">curl nginx</figcaption>
+
+<p><img src="http://upload-images.jianshu.io/upload_images/7269465-22a6da85f6f40076.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="浏览器访问nginx" title="浏览器访问nginx"></p>
+<figcaption style="line-height: inherit; margin: 0px; padding: 0px; margin-top: 10px; text-align: center; color: rgb(153, 153, 153); font-size: 0.7em;">浏览器访问nginx</figcaption>
+
+<p><strong>至此，kubernetes 高可用集群成功部署！</strong></p>
+
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #f44336;font-size:14px;">--------------------------------------------本文结束<i class="far fa-fw fa-home"></i>感谢您的阅读--------------------------------------------</div>
+    
+</div>
+      
+    </div>
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="http://plbhkv0pr.bkt.clouddn.com/wechat-qcode.jpg" alt="zoluo wechat" style="width: 200px; max-width: 100%;">
+    <div>欢迎您扫一扫上面的微信公众号，订阅我的博客！</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="http://plbhkv0pr.bkt.clouddn.com/wechatpay.png" alt="zoluo 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="http://plbhkv0pr.bkt.clouddn.com/alipay.jpg" alt="zoluo 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/kubernetes/" rel="tag"><i class="fa fa-tag"></i> kubernetes</a>
+          
+            <a href="/tags/docker/" rel="tag"><i class="fa fa-tag"></i> docker</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/23/Nginx-https-配置/" rel="next" title="Nginx https 配置">
+                <i class="fa fa-chevron-left"></i> Nginx https 配置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/14/使用-kubeadm-搭建-k8s-1-10-0-开发测试集群环境/" rel="prev" title="使用 kubeadm 搭建 k8s-1.10.0 开发测试集群环境">
+                使用 kubeadm 搭建 k8s-1.10.0 开发测试集群环境 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "1",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      },
+      "slide": {
+        "bdImg": "5",
+        "bdPos": "left",
+        "bdTop": "100"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="http://plbhkv0pr.bkt.clouddn.com/avatar.png" alt="zoluo">
+            
+              <p class="site-author-name" itemprop="name">zoluo</p>
+              <p class="site-description motion-element" itemprop="description">一个行走在 Java 后端设计之路的 Young Man.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/zoluoc" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/aa9caab6cf80" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-heartbeat"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                推荐阅读
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.jianshu.com/p/9d310d7474ed" title="Redis HA" target="_blank">Redis HA</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.jianshu.com/p/08e8c4e69cc6" title="DevOps" target="_blank">DevOps</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#kubernetes-相关服务安装"><span class="nav-number">1.</span> <span class="nav-text">kubernetes 相关服务安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#master-集群高可用设置"><span class="nav-number">2.</span> <span class="nav-text">master 集群高可用设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#验证高可用安装"><span class="nav-number">3.</span> <span class="nav-text">验证高可用安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#keepalived-安装配置"><span class="nav-number">4.</span> <span class="nav-text">keepalived 安装配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#nginx负载均衡配置"><span class="nav-number">4.1.</span> <span class="nav-text">nginx负载均衡配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#kube-proxy配置"><span class="nav-number">4.2.</span> <span class="nav-text">kube-proxy配置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#验证-master-集群高可用"><span class="nav-number">5.</span> <span class="nav-text">验证 master 集群高可用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#node-节点加入高可用集群设置"><span class="nav-number">6.</span> <span class="nav-text">node 节点加入高可用集群设置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#部署应用验证集群"><span class="nav-number">6.1.</span> <span class="nav-text">部署应用验证集群</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zoluo</span>
+
+  
+</div>
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">全站共24.6k字</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'F03bWiFpGBow26jvqWd38iBK-gzGzoHsz',
+        appKey: 'cCMjSXRIJies5tpN2tEIJWc9',
+        placeholder: 'Just go go',
+        avatar:'mp',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("F03bWiFpGBow26jvqWd38iBK-gzGzoHsz", "cCMjSXRIJies5tpN2tEIJWc9");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
