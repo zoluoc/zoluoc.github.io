@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[Redis5.x版本搭建高可用集群（HA）]]></title>
+    <url>%2F2019%2F01%2F16%2FRedis5-x%E7%89%88%E6%9C%AC%E6%90%AD%E5%BB%BA%E9%AB%98%E5%8F%AF%E7%94%A8%E9%9B%86%E7%BE%A4%EF%BC%88HA%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[单机环境搭建 单机环境仅供我们平时开发和测试时使用，一般我们可能会在 Linux 或者 Windows 上部署，Windows版本的部署非常简单，首先在 GitHub 上下载 zip 包解压到指定位置，后执行下面的命令就成功的部署好了。下载地址 Redis GitHub 下载地址 12redis-server.exe redis.windows.config` 运行成功如下图 Linux 版本安装如下 1.主机名修改hostnamectl –static set-hostname redis1 2.安装gcc yum install gcc检查是否安装 gcc -v 3.下载 Redis gz 安装包到 Redis 官网下载安装包，也可使用一下命令直接下载到服务器1wget http://download.redis.io/releases/redis-5.0.3.tar.gz #远程下载 下载完成后解压到 /usr/local 目录下修改 /usr/local/redis-5.0.3/redis.conf 参数 daemonize 值改为 yes，使其后台运行，启动命令如下：1/usr/local/redis-5.0.3/src/redis-server /usr/local/redis-5.0.3/redis.conf #指定配置文件 4.验证单机环境 验证启动是否成功 ps -ef | grep redis 进入redis客户端 /usr/local/redis-5.0.3/src/redis-cli 存数据 set name zoluo 取数据 get name 退出客户端 quit 或 Ctrl + C 或 exit 退出redis服务：（1）pkill redis-server（2）kill -9 进程号 高可用集群环境搭建哨兵模式在 Redis3.0 以前的版本要实现集群一般是借助哨兵 sentinel 工具来监控master节点的状态， 如果 master 节点异常，则会做主从切换，将某一台 slave 作为 master，哨兵的配置略微复 杂，并且性能和高可用性等各方面表现一般，特别是在主从切换的瞬间存在访问瞬断的情 况，而且哨兵模式只有一个主节点对外提供服务，没法支持很高的并发，且单个主节点内存 也不宜设置得过大，否则会导致持久化文件过大，影响数据恢复或主从同步的效率。参考： Redis 中哨兵sentinel 机制、从宕机及恢复、主库宕机及恢复解决方案 redis哨兵模式高可用集群模式1.概述Redis 的集群主要是使用切片技术来搭建的，简单来说就是把所有KEY分散存放到不同的redis节点上（不要把鸡蛋都放在一个篮子里）。 2.说明Redis 集群是一个由多个主从节点群组成的分布式服务器群，它具有复制、高可用和分片特 性。Redis 集群不需要 sentinel 哨兵也能完成节点移除和故障转移的功能。需要将每个节点 设置成集群模式，这种集群模式没有中心节点，可水平扩展，据官方文档称可以线性扩展到 上万个节点(官方推荐不超过 1000 个节点)。Redis 集群的性能和高可用性均优于之前版本的 哨兵模式，且集群配置非常简单 。 3.集群基本原理Redis 集群中内置了 16384 个槽位，当需要放置数据时，Redis 先对 KEY 使用 CRC16 算法计算出一个结果，然后把结果对 16384 求余数，这样每个 KEY 都会对应一个编号在 0-16383 之间的槽号码，Redis 会根据节点数量大致均等的原则将哈希槽映射到不同节点。比如有 3 个 Redis 节点，把 16384 分成 3 段，每个节点承担一段范围的哈希槽。在一个集群中16384个槽位必须同时在线否则集群就会失败。 优点是添加和移除节点非常容易。比如要新增一个节点，值需要从其他节点上移动一些槽位到新节点即可，如果要删除一个节点，那就把它拥有的槽位移动到其他节点，然后进行删除。上面这种移动过程不需要任何停机时间。 所有的 Redis 节点彼此互通 节点的失败是通过集群中超过半数的节点检测失效才生效的 客户端与 Redis 节点直连，不需要中间的代理，客户端不需要连接集群所有节点，只需要连接任何一个可用的节点即可 4.Redis 高可用集群搭建Redis 集群需要至少要三个 master 节点，我们这里使用三台虚拟机搭建三个 master 节点，并且给每个 master 再搭建一个slave 节点，总共6个 Redis 节点，这里用三台机器部署6个 Redis 实例，每台机器一主一从，搭建集群的步骤如下： 第一步：在每台机器的 /usr/local 下创建文件夹 redis-cluster，然后在其下面分别创建 2 个文件夹如下123456789101112$redis1mkdir -p /usr/local/redis-cluster mkdir 7001mkdir 7002 $redis2mkdir -p /usr/local/redis-cluster mkdir 7003mkdir 7004 $redis3mkdir -p /usr/local/redis-cluster mkdir 7005mkdir 7006 第二步：把之前的 /usr/local/redis-5.0.3/redis.conf 配置文件 copy 到每个 700* 下，修改如下内容：1234567891011（1）daemonize yes （2）port 7001 #分别对每个机器的端口号进行设置 （3）dir /usr/local/redis-cluster/7001/ #指定数据文件存放位置，必须要指定不同的目录位置，不然会丢失数据（4）cluster-enabled yes #启动集群模式 （5）cluster-config-file nodes-7001.conf #集群节点信息文件，这里 700* 和port对应上 （6）cluster-node-timeout 5000 （7) # bind 127.0.0.1 #去掉bind绑定访问ip信息（8) protected-mode no #关闭保护模式 （9）appendonly yes #如果要设置密码需要增加如下配置： requirepass zoluo #设置redis访问密码 masterauth zoluo #设置集群节点间访问密码，跟上面一致 第三步：另外两台机器修改第2、3、5项里的端口号 第四步：分别启动6个redis实例，然后检查是否启动成功，命令如下12/usr/local/redis-5.0.3/src/redis-server /usr/local/redis-cluster/700*/redis.conf ps -ef | grep redis #查看是否启动成功 第五步：用 redis-cli 创建整个 Redis 集群(Redis 5.x以前的版本集群是依靠 ruby 脚本 redistrib.rb 实现)1/usr/local/redis-5.0.3/src/redis-cli -a sinopec --cluster create --cluster-replicas 1 10.18.2.156:7001 10.18.2.160:7004 10.18.2.160:7003 10.18.2.187:7006 10.18.2.187:7005 10.18.2.156:7002 192.168.0.63:8006 #代表为每个创建的主服务器节点创建一个从服务器节点 第六步：验证集群：（1）连接任意一个客户端即可：12345#./redis-cli -c -h -p (-a访问服务端密码，-c表示集群模 式，指定ip地址和端口号）/usr/local/redis-5.0.3/src/redis-cli -a zoluo-c -h 10.18.2.160 -p 700* cluster infoc #查看集群信息cluster nodes #查看节点列表 #进行数据操作验证 （2）关闭集群则需要逐个进行关闭，使用命令：1/usr/local/redis-5.0.3/src/redis-cli -a zoluo -c -h 10.18.2.160 -p 700* shutdown 自此 Redis 高可用集群搭建完毕！参考：Redis 集群详解Redis 官方说明 补充说明1.Redis 集群节点加入顺序与主节点与从节点关联是随机的，参考官方说明。2.如果在安装过程中出现不可逆转的错误或安装失败，最好重新安装。重新安装我要做关键的两步： 关闭集群 123/usr/local/redis-5.0.3/src/redis-cli -a zoluo -c -h 10.18.2.160 -p 700* shutdown或kill -9 进程号 删除每台机器上数据文件 123cd /usr/local/redis-cluster/700*/rm -rf appendonly.700*.aofrm -rf nodes.700*.conf 重复操作上面 4、5、6 步骤，当然如果需要修改端口，按照每台机器不重复修改就行了。]]></content>
+      <categories>
+        <category>高可用架构</category>
+      </categories>
+      <tags>
+        <tag>redis</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Hexo博客建站一〈基础搭建〉]]></title>
+    <url>%2F2018%2F05%2F15%2FHexo%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E4%B8%80%E3%80%88%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA%E3%80%89%2F</url>
+    <content type="text"><![CDATA[搭建个人博客前面提到了有很多种，我采用的是 Hexo 静态博客，Next 主题。在这里 Hexo Next 就不做详细介绍了，官网地址戳这里 Hexo Next官方网站对安装与配置进行了详细的介绍，包括站点配置主题配置，后面我针对需要的部分进行配置与说明。下面是我搭建的详细过程。 准备工作 电脑以及拥有可用的系统，可上网，Windows、Linux、Mac Os 都可以 Git客户端安装Git 客户端下载点击安装，安装完成如下图 Node.js安装 Node 下载点击安装，安装完成如下图 远程代码仓库 Github、Coding都行，这里我选择Github 这里需注意仓库名必须是 username.github.io 可解析域名准备一个，暂时没有的可不用，我自己买了一个国际域名 corkercode.com 开始安装hexo安装官网上已经有详细的安装说明了，这里记录下关键必须的步骤。当以上所有必备的应用程序安装完成后，即可使用 npm 安装 Hexo，以下所有步骤都在自己建的目录下进行。1npm install hexo --save 安装 Hexo 完成后，请执行下列命令，Hexo 将会在指定文件夹中新建所需要的文件。12hexo initnpm install 新建完成后，指定文件夹的目录如下：这个时候你运行以下命令就可以看到博客框架已搭建起来了访问 博客主页。12hexo ghexo s next安装可以看到上面博客主题不是自己喜欢的样子，别着急，github上给我提供了很多主题样式，地址在这里，自己选择，配置大同小异，我选用next。在终端窗口下，定位到 Hexo 站点目录下。使用 Git checkout 代码：1git clone https://github.com/iissnan/hexo-theme-next themes/next 这时在本地终端上Ctrl+c，结束正在运行的进程，并修改站点配置文件主题为next重新执行上面的命令，可以看到成功的切换到了我们喜欢的主题了。但是和别人的主题比起来还是有一些逊色，不着急，这些都是可以一步一步的配置的，不过我这里注重原创内容创造，对内容上面的配置会更加注重，后面我也会尽量添加一些样式的配置，大家可参考参考。]]></content>
+      <categories>
+        <category>个人博客</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[个人博客]]></title>
+    <url>%2F2018%2F05%2F14%2F%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%2F</url>
+    <content type="text"><![CDATA[搭建个人博客的想法作为一个程序员时不时会看到和想到一些好的文章和观点，有时候还有些漂亮的代码段，想记录下来的方式很多，以前本人使用印象笔记来记录点滴。直到2017年初有了建立博客的想法，最开始自己想使用 Java web 来开发一个 Blog 以及后台管理，v1.0.0 版本也发布出来了，但是个人感觉丑死了，后台使用包 Bootstrap 还好一些，而且没有评论和计数的功能，所以就放弃使用了。后来在网上找了一些第三方的静态 Blog 搭建的方案，最后还是确定使用 Hexo 静态博客和 Next 主题来搭建。 搭建博客的方式搭建博客的方式有很多种，网上也有很多实例如 Wordpress、Z-blog等，我看了几种感觉都感觉不是很合适，最后看到的 Hexo 搭配 GitHub Pages搭建静态博客网站感觉还是挺好的，有很多主题可自己选择，还有很多插件也可以安装，所以就选择了这种方式来搭建我的个人博客。由于搭建博客的过程听起来简单但还是对于一些新人或非程序员来说还是有些不便，后面我会出一个系列文章来指导大家——如何搭建出优美的个人博客。 搭建博客的目的时间不等人，知识学了会忘，blog不仅可以记录你生活的点滴还能帮助你成长，能让别人来见证你的过程，还能帮助别人解决困难……所以我决定开始属于自己的 Blog。后面我会不定时的更新博客内容，诚邀大家一起指点记录 zoluo.]]></content>
+      <categories>
+        <category>个人博客</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+</search>
