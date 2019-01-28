@@ -85,7 +85,7 @@
 
 
 
-  <meta name="keywords" content="redis,">
+  <meta name="keywords" content="Hexo, NexT">
 
 
 
@@ -98,20 +98,16 @@
 
 
 
-<meta name="keywords" content="redis">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Redis5.x版本搭建高可用集群（HA）">
-<meta property="og:url" content="https://www.corkercode.com/2019/01/16/Redis5-x版本搭建高可用集群（HA）/index.html">
+<meta name="description" content="一个行走在 Java 后端设计之路的 Young Man.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="zoluo">
+<meta property="og:url" content="https://www.corkercode.com/page/3/index.html">
 <meta property="og:site_name" content="zoluo">
+<meta property="og:description" content="一个行走在 Java 后端设计之路的 Young Man.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://plbhkv0pr.bkt.clouddn.com/redis%20ha.png">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7269465-e0b6c83daf237c6e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7269465-48e11219eb7bc74b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7269465-7e1e0fe8a15432b7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-01-27T16:13:40.678Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Redis5.x版本搭建高可用集群（HA）">
-<meta name="twitter:image" content="http://plbhkv0pr.bkt.clouddn.com/redis%20ha.png">
+<meta name="twitter:title" content="zoluo">
+<meta name="twitter:description" content="一个行走在 Java 后端设计之路的 Young Man.">
 
 
 
@@ -141,13 +137,13 @@
 
 
 
-  <link rel="canonical" href="https://www.corkercode.com/2019/01/16/Redis5-x版本搭建高可用集群（HA）/">
+  <link rel="canonical" href="https://www.corkercode.com/page/3/">
 
 
 
 
 
-  <title>Redis5.x版本搭建高可用集群（HA） | zoluo</title>
+  <title>zoluo</title>
   
 
 
@@ -166,7 +162,8 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left 
+  page-home">
     <div class="headband"></div>
     <a href="https://https://github.com/zoluoc" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
 
@@ -323,9 +320,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-
-  <div id="posts" class="posts-expand">
+  <section id="posts" class="posts-expand">
     
+      
 
   
 
@@ -338,7 +335,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.corkercode.com/2019/01/16/Redis5-x版本搭建高可用集群（HA）/">
+    <link itemprop="mainEntityOfPage" href="https://www.corkercode.com/2018/08/14/web常见错误提示/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zoluo">
@@ -355,7 +352,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Redis5.x版本搭建高可用集群（HA）</h1>
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/14/web常见错误提示/" itemprop="url">web常见错误提示</a></h1>
         
 
         <div class="post-meta">
@@ -367,8 +366,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-16T23:21:30+08:00">
-                2019-01-16
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-14T22:50:32+08:00">
+                2018-08-14
               </time>
             
 
@@ -383,7 +382,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-01-28T00:13:40+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-28T00:15:54+08:00">
                 2019-01-28
               </time>
             
@@ -402,8 +401,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/高可用架构/" itemprop="url" rel="index">
-                    <span itemprop="name">高可用架构</span>
+                  <a href="/categories/Java-编程思想/" itemprop="url" rel="index">
+                    <span itemprop="name">Java 编程思想</span>
                   </a>
                 </span>
 
@@ -420,8 +419,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/01/16/Redis5-x版本搭建高可用集群（HA）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/01/16/Redis5-x版本搭建高可用集群（HA）/" itemprop="commentCount"></span>
+                <a href="/2018/08/14/web常见错误提示/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/08/14/web常见错误提示/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -429,7 +428,7 @@
 
           
           
-             <span id="/2019/01/16/Redis5-x版本搭建高可用集群（HA）/" class="leancloud_visitors" data-flag-title="Redis5.x版本搭建高可用集群（HA）">
+             <span id="/2018/08/14/web常见错误提示/" class="leancloud_visitors" data-flag-title="web常见错误提示">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -454,7 +453,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.9k
+                  2.2k
                 </span>
               
 
@@ -491,65 +490,16 @@
       
 
       
-        <div style="width: 500px; margin: auto"><img src="http://plbhkv0pr.bkt.clouddn.com/redis%20ha.png" alt=""></div>
-
-<a id="more"></a>
-<h3 id="单机环境搭建"><a href="#单机环境搭建" class="headerlink" title="单机环境搭建"></a>单机环境搭建</h3><blockquote>
-<p>单机环境仅供我们平时开发和测试时使用，一般我们可能会在 Linux 或者 Windows 上部署，Windows版本的部署非常简单，首先在 GitHub 上下载 zip 包解压到指定位置，后执行下面的命令就成功的部署好了。下载地址 <a href="https://github.com/MicrosoftArchive/redis/releases" target="_blank" rel="noopener">Redis GitHub 下载地址</a></p>
-</blockquote>
-<!--more -->
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">redis-server.exe redis.windows.config</span><br><span class="line">`</span><br></pre></td></tr></table></figure>
-<p>运行成功如下图<br><img src="http://upload-images.jianshu.io/upload_images/7269465-e0b6c83daf237c6e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Windows Redis"></p>
-<blockquote>
-<p>Linux 版本安装如下</p>
-</blockquote>
-<p>1.主机名修改<br>hostnamectl –static set-hostname  redis1</p>
-<p>2.安装gcc  yum install gcc<br>检查是否安装 gcc -v</p>
-<p>3.下载 Redis gz 安装包<br>到 <a href="https://redis.io/download" target="_blank" rel="noopener">Redis 官网</a>下载安装包，也可使用一下命令直接下载到服务器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http://download.redis.io/releases/redis-5.0.3.tar.gz  #远程下载</span><br></pre></td></tr></table></figure></p>
-<p>下载完成后解压到 <strong>/usr/local</strong> 目录下<br>修改 <strong>/usr/local/redis-5.0.3/redis.conf</strong> 参数 daemonize 值改为 yes，使其后台运行，启动命令如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/redis-5.0.3/src/redis-server /usr/local/redis-5.0.3/redis.conf #指定配置文件</span><br></pre></td></tr></table></figure></p>
-<p>4.验证单机环境</p>
-<ul>
-<li>验证启动是否成功   ps -ef | grep redis  </li>
-<li>进入redis客户端   /usr/local/redis-5.0.3/src/redis-cli  </li>
-<li>存数据 set name zoluo</li>
-<li>取数据 get name</li>
-<li>退出客户端  quit 或 Ctrl + C 或 exit</li>
-<li>退出redis服务：<br>（1）pkill redis-server<br>（2）kill -9 进程号</li>
-</ul>
-<h3 id="高可用集群环境搭建"><a href="#高可用集群环境搭建" class="headerlink" title="高可用集群环境搭建"></a>高可用集群环境搭建</h3><h4 id="哨兵模式"><a href="#哨兵模式" class="headerlink" title="哨兵模式"></a>哨兵模式</h4><p>在 Redis3.0 以前的版本要实现集群一般是借助哨兵 sentinel 工具来监控master节点的状态， 如果 master 节点异常，则会做主从切换，将某一台 slave 作为 master，哨兵的配置略微复 杂，并且性能和高可用性等各方面表现一般，特别是在主从切换的瞬间存在访问瞬断的情 况，而且哨兵模式只有一个主节点对外提供服务，没法支持很高的并发，且单个主节点内存 也不宜设置得过大，否则会导致持久化文件过大，影响数据恢复或主从同步的效率。<br>参考：</p>
-<ul>
-<li><a href="https://blog.csdn.net/py_tamir/article/details/82555338" target="_blank" rel="noopener">Redis 中哨兵sentinel 机制、从宕机及恢复、主库宕机及恢复解决方案</a></li>
-<li><a href="https://www.cnblogs.com/gdpuzxs/p/6659873.html" target="_blank" rel="noopener">redis哨兵模式</a><h4 id="高可用集群模式"><a href="#高可用集群模式" class="headerlink" title="高可用集群模式"></a>高可用集群模式</h4>1.概述<br>Redis 的集群主要是使用切片技术来搭建的，简单来说就是把所有KEY分散存放到不同的redis节点上（不要把鸡蛋都放在一个篮子里）。</li>
-</ul>
-<p>2.说明<br>Redis 集群是一个由多个主从节点群组成的分布式服务器群，它具有复制、高可用和分片特 性。Redis 集群不需要 sentinel 哨兵也能完成节点移除和故障转移的功能。需要将每个节点 设置成集群模式，这种集群模式没有中心节点，可水平扩展，据官方文档称可以线性扩展到 上万个节点(官方推荐不超过 1000 个节点)。Redis 集群的性能和高可用性均优于之前版本的 哨兵模式，且集群配置非常简单 。</p>
-<p>3.集群基本原理<br>Redis 集群中内置了 16384 个槽位，当需要放置数据时，Redis 先对 KEY 使用 CRC16 算法计算出一个结果，然后把结果对 16384 求余数，这样每个 KEY 都会对应一个编号在 0-16383 之间的槽号码，Redis 会根据节点数量大致均等的原则将哈希槽映射到不同节点。比如有 3 个 Redis 节点，把 16384 分成 3 段，每个节点承担一段范围的哈希槽。在一个集群中16384个槽位必须同时在线否则集群就会失败。</p>
-<p>优点是添加和移除节点非常容易。比如要新增一个节点，值需要从其他节点上移动一些槽位到新节点即可，如果要删除一个节点，那就把它拥有的槽位移动到其他节点，然后进行删除。上面这种移动过程不需要任何停机时间。</p>
-<p>所有的 Redis 节点彼此互通</p>
-<ul>
-<li>节点的失败是通过集群中超过半数的节点检测失效才生效的</li>
-<li>客户端与 Redis 节点直连，不需要中间的代理，客户端不需要连接集群所有节点，只需要连接任何一个可用的节点即可</li>
-</ul>
-<p>4.Redis 高可用集群搭建<br>Redis 集群需要至少要三个 master 节点，我们这里使用三台虚拟机搭建三个 master 节点，并且给每个 master 再搭建一个slave 节点，总共6个 Redis 节点，这里用三台机器部署6个 Redis 实例，<br>每台机器一主一从，搭建集群的步骤如下：</p>
-<p>第一步：在每台机器的 /usr/local 下创建文件夹 <strong>redis-cluster</strong>，然后在其下面分别创建 2 个文件夹如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$redis1</span><br><span class="line">mkdir -p /usr/local/redis-cluster  </span><br><span class="line">mkdir 7001</span><br><span class="line">mkdir 7002 </span><br><span class="line">$redis2</span><br><span class="line">mkdir -p /usr/local/redis-cluster  </span><br><span class="line">mkdir 7003</span><br><span class="line">mkdir 7004 </span><br><span class="line">$redis3</span><br><span class="line">mkdir -p /usr/local/redis-cluster  </span><br><span class="line">mkdir 7005</span><br><span class="line">mkdir 7006</span><br></pre></td></tr></table></figure></p>
-<p>第二步：把之前的 /usr/local/redis-5.0.3/redis.conf 配置文件 copy 到每个 700* 下，修改如下内容：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">（1）daemonize yes  </span><br><span class="line">（2）port 7001 #分别对每个机器的端口号进行设置  </span><br><span class="line">（3）dir /usr/local/redis-cluster/7001/ #指定数据文件存放位置，必须要指定不同的目录位置，不然会丢失数据</span><br><span class="line">（4）cluster-enabled yes #启动集群模式 </span><br><span class="line">（5）cluster-config-file nodes-7001.conf #集群节点信息文件，这里 700* 和port对应上  </span><br><span class="line">（6）cluster-node-timeout 5000   </span><br><span class="line">（7)  # bind 127.0.0.1 #去掉bind绑定访问ip信息</span><br><span class="line">（8) protected-mode  no  #关闭保护模式  </span><br><span class="line">（9）appendonly yes  #如果要设置密码需要增加如下配置： </span><br><span class="line">         requirepass zoluo  #设置redis访问密码</span><br><span class="line">         masterauth zoluo  #设置集群节点间访问密码，跟上面一致</span><br></pre></td></tr></table></figure></p>
-<p>第三步：另外两台机器修改第2、3、5项里的端口号</p>
-<p>第四步：分别启动6个redis实例，然后检查是否启动成功，命令如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/redis-5.0.3/src/redis-server /usr/local/redis-cluster/700*/redis.conf  </span><br><span class="line">ps -ef | grep redis #查看是否启动成功</span><br></pre></td></tr></table></figure></p>
-<p>第五步：用 redis-cli 创建整个 Redis 集群(<strong>Redis 5.x以前的版本集群是依靠 ruby 脚本 redistrib.rb 实现</strong>)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/redis-5.0.3/src/redis-cli -a sinopec --cluster create --cluster-replicas 1 10.18.2.156:7001 10.18.2.160:7004 10.18.2.160:7003 10.18.2.187:7006 10.18.2.187:7005 10.18.2.156:7002 192.168.0.63:8006 #代表为每个创建的主服务器节点创建一个从服务器节点</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/7269465-48e11219eb7bc74b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="加入集群"><br>第六步：验证集群：<br>（1）连接任意一个客户端即可：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#./redis-cli -c -h -p (-a访问服务端密码，-c表示集群模 式，指定ip地址和端口号）</span><br><span class="line">/usr/local/redis-5.0.3/src/redis-cli -a zoluo-c -h  10.18.2.160 -p 700*  </span><br><span class="line">cluster infoc #查看集群信息</span><br><span class="line">cluster nodes #查看节点列表 </span><br><span class="line">#进行数据操作验证</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/7269465-7e1e0fe8a15432b7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="节点信息"><br>（2）关闭集群则需要逐个进行关闭，使用命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/redis-5.0.3/src/redis-cli -a zoluo -c -h 10.18.2.160 -p 700* shutdown</span><br></pre></td></tr></table></figure></p>
-<p>自此 Redis 高可用集群搭建完毕！参考：<br><a href="https://www.cnblogs.com/yunxizhujing/articles/9750670.html" target="_blank" rel="noopener">Redis 集群详解</a><br><a href="https://redis.io/commands/cluster-nodes" target="_blank" rel="noopener">Redis 官方说明</a></p>
-<h5 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h5><p>1.Redis 集群节点加入顺序与主节点与从节点关联是随机的，参考官方说明。<br>2.如果在安装过程中出现不可逆转的错误或安装失败，最好重新安装。<br>重新安装我要做关键的两步：</p>
-<ul>
-<li><p>关闭集群</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/redis-5.0.3/src/redis-cli -a zoluo -c -h 10.18.2.160 -p 700* shutdown</span><br><span class="line">或</span><br><span class="line">kill -9 进程号</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>删除每台机器上数据文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/redis-cluster/700*/</span><br><span class="line">rm -rf appendonly.700*.aof</span><br><span class="line">rm -rf nodes.700*.conf</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>重复操作上面 4、5、6 步骤，当然如果需要修改端口，按照每台机器不重复修改就行了。</p>
-</li>
-</ul>
-
+        
+          <div style="width: 500px; margin: auto"><img src="http://plbhkv0pr.bkt.clouddn.com/404.jpg" alt=""></div>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/08/14/web常见错误提示/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
       
     </div>
     
@@ -558,89 +508,24 @@
 
     <div>
       
-        <div>
-    
-        <div style="text-align:center;color: #f44336;font-size:14px;">--------------------------------------------本文结束<i class="far fa-fw fa-home"></i>感谢您的阅读--------------------------------------------</div>
-    
-</div>
-      
     </div>
 
     
-      <div>
-        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
-    <img id="wechat_subscriber_qcode" src="http://plbhkv0pr.bkt.clouddn.com/wechat-qcode.jpg" alt="zoluo wechat" style="width: 200px; max-width: 100%;">
-    <div>欢迎您扫一扫上面的微信公众号，订阅我的博客！</div>
-</div>
 
-      </div>
-    
-
-    
-      <div>
-        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
-  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
-    <span>打赏</span>
-  </button>
-  <div id="QR" style="display: none;">
-
-    
-      <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="http://plbhkv0pr.bkt.clouddn.com/wechatpay.png" alt="zoluo 微信支付">
-        <p>微信支付</p>
-      </div>
-    
-
-    
-      <div id="alipay" style="display: inline-block">
-        <img id="alipay_qr" src="http://plbhkv0pr.bkt.clouddn.com/alipay.jpg" alt="zoluo 支付宝">
-        <p>支付宝</p>
-      </div>
-    
-
-    
-
-  </div>
-</div>
-
-      </div>
     
 
     
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/redis/" rel="tag"><i class="fa fa-tag"></i> redis</a>
-          
-        </div>
+
+      
+
       
 
       
       
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/12/14/Docker-Harbor私有仓库搭建/" rel="next" title="Docker Harbor私有仓库搭建">
-                <i class="fa fa-chevron-left"></i> Docker Harbor私有仓库搭建
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-          </div>
-        </div>
-      
-
-      
+        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -650,38 +535,1084 @@
   </article>
 
 
+    
+      
 
-    <div class="post-spread">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.corkercode.com/2018/07/14/Hexo博客建站六〈彩蛋〉/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zoluo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://plbhkv0pr.bkt.clouddn.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zoluo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/14/Hexo博客建站六〈彩蛋〉/" itemprop="url">Hexo博客建站六〈彩蛋〉</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-14T13:40:34+08:00">
+                2018-07-14
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-28T00:15:00+08:00">
+                2019-01-28
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/个人博客/" itemprop="url" rel="index">
+                    <span itemprop="name">个人博客</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/07/14/Hexo博客建站六〈彩蛋〉/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/07/14/Hexo博客建站六〈彩蛋〉/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/07/14/Hexo博客建站六〈彩蛋〉/" class="leancloud_visitors" data-flag-title="Hexo博客建站六〈彩蛋〉">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.3k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  7
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
       
         
-  <script>
-    window._bd_share_config = {
-      "common": {
-        "bdText": "",
-        "bdMini": "1",
-        "bdMiniList": false,
-        "bdPic": ""
-      },
-      "image": {
-        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
-        "viewText": "分享到：",
-        "viewSize": "16"
-      },
-      "slide": {
-        "bdImg": "5",
-        "bdPos": "left",
-        "bdTop": "100"
-      }
-    }
-  </script>
-
-<script>
-  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
-</script>
-
+          <div style="width: 500px; margin: auto"><img src="http://plbhkv0pr.bkt.clouddn.com/hexo_2019-01-26_14-20-01.png" alt="zoluo 个人博客"></div>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/14/Hexo博客建站六〈彩蛋〉/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
       
     </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
   </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.corkercode.com/2018/07/14/Hexo博客建站五〈天阶配置〉/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zoluo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://plbhkv0pr.bkt.clouddn.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zoluo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/14/Hexo博客建站五〈天阶配置〉/" itemprop="url">Hexo博客建站五〈天阶配置〉</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-14T13:35:10+08:00">
+                2018-07-14
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-28T00:16:41+08:00">
+                2019-01-28
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/个人博客/" itemprop="url" rel="index">
+                    <span itemprop="name">个人博客</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/07/14/Hexo博客建站五〈天阶配置〉/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/07/14/Hexo博客建站五〈天阶配置〉/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/07/14/Hexo博客建站五〈天阶配置〉/" class="leancloud_visitors" data-flag-title="Hexo博客建站五〈天阶配置〉">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.2k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  4
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <div style="width: 500px; margin: auto"><img src="http://plbhkv0pr.bkt.clouddn.com/hexo-all.png" alt=""></div>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/14/Hexo博客建站五〈天阶配置〉/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.corkercode.com/2018/07/14/Hexo博客建站四〈地阶配置〉/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zoluo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://plbhkv0pr.bkt.clouddn.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zoluo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/14/Hexo博客建站四〈地阶配置〉/" itemprop="url">Hexo博客建站四〈地阶配置〉</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-14T13:34:27+08:00">
+                2018-07-14
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-28T00:16:46+08:00">
+                2019-01-28
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/个人博客/" itemprop="url" rel="index">
+                    <span itemprop="name">个人博客</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/07/14/Hexo博客建站四〈地阶配置〉/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/07/14/Hexo博客建站四〈地阶配置〉/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/07/14/Hexo博客建站四〈地阶配置〉/" class="leancloud_visitors" data-flag-title="Hexo博客建站四〈地阶配置〉">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.5k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  12
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <div style="width: 500px; margin: auto"><img src="http://plbhkv0pr.bkt.clouddn.com/hexo-678x381.png" alt=""></div>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/14/Hexo博客建站四〈地阶配置〉/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.corkercode.com/2018/07/14/Hexo博客建站三〈玄阶配置〉/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zoluo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://plbhkv0pr.bkt.clouddn.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zoluo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/14/Hexo博客建站三〈玄阶配置〉/" itemprop="url">Hexo博客建站三〈玄阶配置〉</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-14T13:33:37+08:00">
+                2018-07-14
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-28T00:16:51+08:00">
+                2019-01-28
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/个人博客/" itemprop="url" rel="index">
+                    <span itemprop="name">个人博客</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/07/14/Hexo博客建站三〈玄阶配置〉/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/07/14/Hexo博客建站三〈玄阶配置〉/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/07/14/Hexo博客建站三〈玄阶配置〉/" class="leancloud_visitors" data-flag-title="Hexo博客建站三〈玄阶配置〉">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  692
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <div style="width: 500px; margin: auto"><img src="http://plbhkv0pr.bkt.clouddn.com/hexo-next.png" alt=""></div>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/14/Hexo博客建站三〈玄阶配置〉/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.corkercode.com/2018/07/14/Hexo博客建站二〈黄阶配置〉/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zoluo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://plbhkv0pr.bkt.clouddn.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zoluo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/14/Hexo博客建站二〈黄阶配置〉/" itemprop="url">Hexo博客建站二〈黄阶配置〉</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-14T13:32:37+08:00">
+                2018-07-14
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-28T00:14:52+08:00">
+                2019-01-28
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/个人博客/" itemprop="url" rel="index">
+                    <span itemprop="name">个人博客</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/07/14/Hexo博客建站二〈黄阶配置〉/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/07/14/Hexo博客建站二〈黄阶配置〉/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/07/14/Hexo博客建站二〈黄阶配置〉/" class="leancloud_visitors" data-flag-title="Hexo博客建站二〈黄阶配置〉">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.4k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  5
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <div style="width: 500px; margin: auto"><img src="http://plbhkv0pr.bkt.clouddn.com/hexo-github.png" alt=""></div>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/14/Hexo博客建站二〈黄阶配置〉/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -689,13 +1620,6 @@
 
 
           
-
-  
-    <div class="comments" id="comments">
-    </div>
-  
-
-
 
         </div>
         
@@ -716,17 +1640,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -830,22 +1745,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#单机环境搭建"><span class="nav-number">1.</span> <span class="nav-text">单机环境搭建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高可用集群环境搭建"><span class="nav-number">2.</span> <span class="nav-text">高可用集群环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#哨兵模式"><span class="nav-number">2.1.</span> <span class="nav-text">哨兵模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#高可用集群模式"><span class="nav-number">2.2.</span> <span class="nav-text">高可用集群模式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#补充说明"><span class="nav-number">2.2.1.</span> <span class="nav-text">补充说明</span></a></li></ol></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -996,10 +1895,6 @@
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
 
   
 

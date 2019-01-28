@@ -1958,7 +1958,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff70d6;
+  background: #3b2ffa;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3423,7 +3423,7 @@ rgba(102,175,233,0.6)
 }
 .btn:hover {
   color: #fff !important;
-  background: #34495e;
+  background: rgba(0,0,0,0) 0;
   text-decoration: none !important;
 }
 .pagination,
