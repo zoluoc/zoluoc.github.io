@@ -1219,6 +1219,12 @@ pre .javascript .function {
 .use-motion .menu-item {
   opacity: 0;
 }
+.menu-state-item-count {
+  text-align: center;
+  color: inherit;
+  font-weight: 600;
+  font-size: 10px;
+}
 .post-body {
   font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
 }
@@ -1952,7 +1958,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #5b99f0;
+  background: #ff559f;
 }
 .links-of-blogroll {
   font-size: 13px;
